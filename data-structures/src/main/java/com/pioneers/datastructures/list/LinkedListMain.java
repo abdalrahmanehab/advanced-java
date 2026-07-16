@@ -9,6 +9,31 @@ public class LinkedListMain {
 
     public static void main(String[] args) {
 
+
+        Integer num = null;
+        Optional<Integer>  op  = Optional.ofNullable(num);
+
+        Optional.ofNullable(num)
+                .ifPresent(n -> System.out.println(n));
+
+        Optional.ofNullable(num)
+                .ifPresent(System.out::println);
+
+        final List<Integer> ls = new ArrayList<>(Arrays.asList(23,56,34,12,53,15,3,7));
+        final List<Integer> sortedList1 = sorted(ls);
+        System.out.println(sortedList1);
+
+        String name1 = Optional.of("Abdo")
+                .orElse(getDefaultName());
+
+        Optional.of(null)
+                .orElse(getDefaultName());
+
+        Optional<String> op1 = Optional.ofNullable(null);
+        String s = op1.orElse("Default");
+        System.out.println(s);
+
+
         List<String> students = new LinkedList<>();
         students.add("Somaya");
         students.add("Basma");
@@ -337,4 +362,12 @@ public class LinkedListMain {
             System.out.println(name);
         }
     }
+
+
+    static String getDefaultName(){
+        System.out.println("runnnig ...");
+        return "deafult";
+    }
+
+
 }
