@@ -18,5 +18,3 @@ Implement a system using Java collections that allows for:
 * **Insertion-Order Preservation** (Maintaining the order of loans)
 * **Efficient Lookup & Removal**
 
-## How to Run
-Run the `Main.java` class inside this package to see the console simulation in action.
