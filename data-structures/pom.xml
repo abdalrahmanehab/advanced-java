@@ -13,6 +13,12 @@
     <artifactId>data-structures</artifactId>
     <version>26.31.1</version>
 
+    <properties>
+        <maven.compiler.source>21</maven.compiler.source>
+        <maven.compiler.target>21</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
     <dependencyManagement>
         <dependencies>
             <dependency>
@@ -27,6 +33,5 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
-
 
 </project>
