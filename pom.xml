@@ -18,11 +18,8 @@
 
     <modules>
         <module>data-structures</module>
-<<<<<<< HEAD
         <module>assignments</module>
-=======
         <module>rest</module>
->>>>>>> 2945fdb3a68ede60e712f639e49238af562d44ef
     </modules>
 
     <properties>
