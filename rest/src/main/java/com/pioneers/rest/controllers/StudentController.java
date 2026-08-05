@@ -30,10 +30,10 @@ public class StudentController {
     // TODO: Edit this method to return the cause of the error!!
 //    @RequestMapping(value = "save", method = RequestMethod.POST)
     @PostMapping("save")
-    public ResponseEntity<Map<UUID, Student>> registerStudentApi(
+    public ResponseEntity<?> registerStudentApi(
             @RequestBody final StudentRegister studentRegisterRequest
     ) {
-        Optional<ResponseEntity<Map<UUID, Student>>> optional = validateStudentRegisterRequest(studentRegisterRequest);
+        Optional<ResponseEntity<?>>optional = validateStudentRegisterRequest(studentRegisterRequest);
         if (optional.isPresent()) {
             return optional.get();
         }
@@ -41,7 +41,7 @@ public class StudentController {
         try {
             findRegisteredStudent(studentRegisterRequest);
         } catch (RegisterException e) {
-            return ResponseEntity.badRequest().build();
+            return ResponseEntity.badRequest().body("Registration error : " + e.getMessage());
         }
 
         final String fullName =
@@ -51,7 +51,7 @@ public class StudentController {
         try {
             hashedPassword = hashPassword(studentRegisterRequest.getPassword());
         } catch (CredentialsException e) {
-            return ResponseEntity.badRequest().build();
+            return ResponseEntity.badRequest().body("Hashing error : " + e.getMessage());
         }
 
         final Student student =

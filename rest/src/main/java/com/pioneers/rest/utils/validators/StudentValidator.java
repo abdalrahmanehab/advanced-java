@@ -1,37 +1,34 @@
 package com.pioneers.rest.utils.validators;
 
 import com.pioneers.rest.models.dtos.requests.StudentRegister;
-import com.pioneers.rest.models.entities.Student;
 import org.springframework.http.ResponseEntity;
 
-import java.util.Map;
 import java.util.Optional;
-import java.util.UUID;
 
 import static com.pioneers.rest.utils.StringUtils.isNullOrBlank;
 
 public class StudentValidator {
-    public static Optional<ResponseEntity<Map<UUID, Student>>> validateStudentRegisterRequest(
+    public static Optional<ResponseEntity<?>> validateStudentRegisterRequest(
             final StudentRegister studentRegisterRequest
     ) {
         if (isNullOrBlank(studentRegisterRequest.getFirstName())) {
-            return Optional.of(ResponseEntity.badRequest().build());
+            return Optional.of(ResponseEntity.badRequest().body("Validation Error: First name cannot be empty"));
         }
 
         if (isNullOrBlank(studentRegisterRequest.getSecondName())) {
-            return Optional.of(ResponseEntity.badRequest().build());
+            return Optional.of(ResponseEntity.badRequest().body("Validation Error: Second name cannot be empty"));
         }
 
         if (isAgeMisaligned(studentRegisterRequest.getAge())) {
-            return Optional.of(ResponseEntity.badRequest().build());
+            return Optional.of(ResponseEntity.badRequest().body("Validation Error: Age must be between 18 and 25"));
         }
 
         if (isEmailInvalid(studentRegisterRequest.getEmail())) {
-            return Optional.of(ResponseEntity.badRequest().build());
+            return Optional.of(ResponseEntity.badRequest().body("Validation Error: Invalid email format"));
         }
 
         if (isPasswordInvalid(studentRegisterRequest.getPassword())) {
-            return Optional.of(ResponseEntity.badRequest().build());
+            return Optional.of(ResponseEntity.badRequest().body("Validation Error: Password must be between 8 and 32 characters"));
         }
 
         return Optional.empty();
@@ -46,6 +43,6 @@ public class StudentValidator {
     }
 
     private static boolean isAgeMisaligned(final int age) {
-        return age < 18 && age > 25;
+        return age < 18 || age > 25;
     }
 }
