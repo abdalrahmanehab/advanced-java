@@ -2,23 +2,21 @@ package com.pioneers.rest.models.dtos.requests;
 
 import java.util.Objects;
 
-public class StudentRegister {
+public class StudentUpdate {
     private final String firstName;
     private final String secondName;
     private final int age;
     private final String email;
     private final String password;
+    private final float score;
 
-    public StudentRegister(String firstName, String secondName, Integer age, String email, String password) {
+    public StudentUpdate(String firstName, String secondName, int age, String email, String password, float score) {
         this.firstName = firstName;
         this.secondName = secondName;
         this.age = age;
         this.email = email;
         this.password = password;
-    }
-
-    public boolean isAgeMisaligned(final int age) {
-        return age < 18 || age > 25;
+        this.score = score;
     }
 
     public String getFirstName() {
@@ -41,11 +39,16 @@ public class StudentRegister {
         return password;
     }
 
+    public float getScore() {
+        return score;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
-        StudentRegister that = (StudentRegister) o;
+        StudentUpdate that = (StudentUpdate) o;
         return age == that.age
+                && Float.compare(score, that.score) == 0
                 && Objects.equals(firstName, that.firstName)
                 && Objects.equals(secondName, that.secondName)
                 && Objects.equals(email, that.email)
@@ -54,16 +57,18 @@ public class StudentRegister {
 
     @Override
     public int hashCode() {
-        return Objects.hash(firstName, secondName, age, email, password);
+        return Objects.hash(firstName, secondName, age, email, password, score);
     }
 
     @Override
     public String toString() {
-        return "StudentRegister{" +
+        return "StudentUpdate{" +
                 "firstName='" + firstName + '\'' +
                 ", secondName='" + secondName + '\'' +
                 ", age=" + age +
                 ", email='" + email + '\'' +
+                ", score=" + score +
+                ", password='***********" + '\'' +
                 '}';
     }
 }

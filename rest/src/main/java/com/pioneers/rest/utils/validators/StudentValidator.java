@@ -3,35 +3,38 @@ package com.pioneers.rest.utils.validators;
 import com.pioneers.rest.models.dtos.requests.StudentRegister;
 import org.springframework.http.ResponseEntity;
 
-import java.util.Optional;
+import java.util.LinkedList;
+import java.util.List;
 
 import static com.pioneers.rest.utils.StringUtils.isNullOrBlank;
 
 public class StudentValidator {
-    public static Optional<ResponseEntity<?>> validateStudentRegisterRequest(
+    public static ResponseEntity<List<String>> validateStudentRegisterRequest(
             final StudentRegister studentRegisterRequest
     ) {
+        final List<String> errors = new LinkedList<>();
+
         if (isNullOrBlank(studentRegisterRequest.getFirstName())) {
-            return Optional.of(ResponseEntity.badRequest().body("Validation Error: First name cannot be empty"));
+            errors.add("First name is required");
         }
 
         if (isNullOrBlank(studentRegisterRequest.getSecondName())) {
-            return Optional.of(ResponseEntity.badRequest().body("Validation Error: Second name cannot be empty"));
+            errors.add("Second name is required");
         }
 
-        if (isAgeMisaligned(studentRegisterRequest.getAge())) {
-            return Optional.of(ResponseEntity.badRequest().body("Validation Error: Age must be between 18 and 25"));
+        if (studentRegisterRequest.isAgeMisaligned(studentRegisterRequest.getAge())) {
+            errors.add("Age is misaligned");
         }
 
         if (isEmailInvalid(studentRegisterRequest.getEmail())) {
-            return Optional.of(ResponseEntity.badRequest().body("Validation Error: Invalid email format"));
+            errors.add("Email is invalid");
         }
 
         if (isPasswordInvalid(studentRegisterRequest.getPassword())) {
-            return Optional.of(ResponseEntity.badRequest().body("Validation Error: Password must be between 8 and 32 characters"));
+            errors.add("Password is invalid");
         }
 
-        return Optional.empty();
+        return ResponseEntity.badRequest().body(errors);
     }
 
     private static boolean isPasswordInvalid(final String password) {
@@ -40,9 +43,5 @@ public class StudentValidator {
 
     private static boolean isEmailInvalid(final String email) {
         return isNullOrBlank(email) || !email.contains("@");
-    }
-
-    private static boolean isAgeMisaligned(final int age) {
-        return age < 18 || age > 25;
     }
 }

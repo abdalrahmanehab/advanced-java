@@ -28,6 +28,10 @@ public class Student {
         this.finalScore = finalScore;
     }
 
+    public boolean isPassedExam() {
+        return (score / finalScore) > 0.5F;
+    }
+
     public UUID getId() {
         return id;
     }
