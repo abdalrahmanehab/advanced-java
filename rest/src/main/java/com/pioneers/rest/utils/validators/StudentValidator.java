@@ -8,7 +8,12 @@ import java.util.List;
 
 import static com.pioneers.rest.utils.StringUtils.isNullOrBlank;
 
-public class StudentValidator {
+public final class StudentValidator {
+
+    private StudentValidator() {
+        throw new AssertionError("Cannot be instantiated");
+    }
+
     public static ResponseEntity<List<String>> validateStudentRegisterRequest(
             final StudentRegister studentRegisterRequest
     ) {
