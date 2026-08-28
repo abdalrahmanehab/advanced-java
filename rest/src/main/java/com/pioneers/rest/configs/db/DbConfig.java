@@ -1,9 +1,12 @@
 package com.pioneers.rest.configs.db;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.DependsOn;
 
 @Configuration
 @EnableConfigurationProperties(DbProperties.class)
@@ -30,7 +33,14 @@ public class DbConfig {
     }
 
     @Bean
-    public DbConnector dbConnector(/*ApplicationContext applicationContext*//*final ConnectionPool connectionPool*/) {
+//    @Profile("prod")
+//    @ConditionalOnProperty(name = "db.connection.flow", havingValue = "true")
+//    @Conditional(PostgresCondition.class)
+//    @ConditionalOnClass(name = "com.pioneers.rest.configs.Test")
+//    @ConditionalOnBean(ConnectionPool.class)
+//    @DependsOn("connectionPool")
+    public DbConnector dbConnector() {
+        System.out.println("Creating the DB connector bean!!");
         final ConnectionPool connectionPool = toConnectionPool(dbProperties.getConnectionPoolProperties());
 
         return new DbConnector(
@@ -41,6 +51,21 @@ public class DbConfig {
                 connectionPool
         );
     }
+
+//    @Bean
+//    @Profile({"local", "test"})
+//    public NewDbConnector newDbConnector(/*ApplicationContext applicationContext*//*final ConnectionPool connectionPool*/) {
+//        System.out.println("Creating the New DB connector bean!!");
+//        final ConnectionPool connectionPool = toConnectionPool(dbProperties.getConnectionPoolProperties());
+//
+//        return new NewDbConnector(
+//                dbProperties.getUsername(),
+//                dbProperties.getPassword(),
+//                dbProperties.getDatabase(),
+//                dbProperties.getUrl(),
+//                connectionPool
+//        );
+//    }
 
     private static ConnectionPool toConnectionPool(
             final DbProperties.ConnectionPoolProperties connectionPoolProperties
@@ -56,6 +81,6 @@ public class DbConfig {
     public ConnectionPool connectionPool() {
         final DbProperties.ConnectionPoolProperties connectionPool = dbProperties.getConnectionPoolProperties();
 
-        return new ConnectionPool(connectionPool.getMaxOpenConnections(), connectionPool.getMaxIdleConnections());
+        return new ConnectionPool(connectionPool.getMaxOpenConnections(), connectionPool.getMaxIdleConnections(), connectionPool.getTimeout());
     }*/
 }

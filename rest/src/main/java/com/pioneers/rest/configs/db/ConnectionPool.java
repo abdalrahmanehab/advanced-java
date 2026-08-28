@@ -3,9 +3,9 @@ package com.pioneers.rest.configs.db;
 import java.util.Objects;
 
 public class ConnectionPool {
-    private final int maxOpenConnections;
-    private final int maxIdleConnections;
-    private final int timeout;
+    private int maxOpenConnections;
+    private int maxIdleConnections;
+    private int timeout;
 
     public ConnectionPool(int maxOpenConnections, int maxIdleConnections, int timeout) {
         this.maxOpenConnections = maxOpenConnections;
@@ -17,12 +17,24 @@ public class ConnectionPool {
         return maxOpenConnections;
     }
 
+    public void setMaxOpenConnections(int maxOpenConnections) {
+        this.maxOpenConnections = maxOpenConnections;
+    }
+
     public int getMaxIdleConnections() {
         return maxIdleConnections;
     }
 
+    public void setMaxIdleConnections(int maxIdleConnections) {
+        this.maxIdleConnections = maxIdleConnections;
+    }
+
     public int getTimeout() {
         return timeout;
+    }
+
+    public void setTimeout(int timeout) {
+        this.timeout = timeout;
     }
 
     @Override

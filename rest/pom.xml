@@ -17,6 +17,11 @@
     <name>rest</name>
     <description>Includes some REST APIs</description>
 
+    <properties>
+        <maven-checkstyle-plugin.version>3.6.0</maven-checkstyle-plugin.version>
+        <checkstyle.version>13.7.0</checkstyle.version>
+    </properties>
+
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
