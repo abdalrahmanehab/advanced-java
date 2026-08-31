@@ -4,7 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 public class DoubleCheckedDatabaseConnection {
-    private static DoubleCheckedDatabaseConnection INSTANCE;
+    private static volatile DoubleCheckedDatabaseConnection INSTANCE;
 
     private DoubleCheckedDatabaseConnection() {
         log.info("compiling the DoubleCheckedDatabaseConnection without initializing the INSTANCE");
