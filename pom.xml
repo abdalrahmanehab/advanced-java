@@ -20,7 +20,6 @@
         <module>data-structures</module>
         <module>assignments</module>
         <module>rest</module>
-        <module>my-design-patterns</module>
     </modules>
 
     <properties>
