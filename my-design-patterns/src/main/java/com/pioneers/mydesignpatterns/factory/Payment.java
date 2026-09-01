@@ -8,7 +8,8 @@ import java.util.Arrays;
 public enum Payment {
     CreditCard("credit_card"),
     PayPal("paypal"),
-    Crypto("crypto");
+    Crypto("crypto"),
+    VodafoneCash("vodafone_cash");
 
     private final String paymentType;
 

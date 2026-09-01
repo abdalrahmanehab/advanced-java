@@ -7,6 +7,7 @@ public class PaymentFactory {
             case Crypto -> new CryptoPayment();
             case PayPal -> new PayPalPayment();
             case CreditCard -> new CreditCardPayment();
+            case VodafoneCash -> new VodafoneCashPayment();
         };
     }
 
