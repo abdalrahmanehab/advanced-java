@@ -20,7 +20,7 @@ public class AnimalProcessor6 {
     private final ObjectProvider<AnimalService> animalServiceProvider;
 
     @Autowired
-    public AnimalProcessor6(@Qualifier("dogStrategy") ObjectProvider<AnimalService> animalServiceProvider) {
+    public AnimalProcessor6(@Qualifier("dog") ObjectProvider<AnimalService> animalServiceProvider) {
         this.animalServiceProvider = animalServiceProvider;
     }
 

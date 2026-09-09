@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 @Slf4j
 //@Primary
 @Order(1)
-@Service
+@Service("lion")
 public class LionStrategy implements AnimalService {
 
     private static final Animal LION = Animal.LION;

@@ -7,12 +7,12 @@ import org.springframework.stereotype.Component;
 /**
  * A strategy class that implements the methods for the Cat Animal
  *
- * @see AnimalService
  * @author abdelaziz.said
+ * @see AnimalService
  */
 @Slf4j
 @Order(3)
-@Component
+@Component("cat")
 public class CatStrategy implements AnimalService {
 
     // TODO: Change the type to be beanName

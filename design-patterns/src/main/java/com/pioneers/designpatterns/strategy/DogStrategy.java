@@ -11,12 +11,12 @@ import java.util.UUID;
 /**
  * A strategy class that implements the methods for the Dog Animal
  *
- * @see com.pioneers.designpatterns.strategy.AnimalService
  * @author abdelaziz.said
+ * @see com.pioneers.designpatterns.strategy.AnimalService
  */
 @Slf4j
 @Order(4)
-@Repository
+@Repository("dog")
 @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
 public class DogStrategy implements AnimalService {
 
