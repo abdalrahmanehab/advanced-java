@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("strategy/animalService")
 public class AnimalController {
 
-    private final AnimalProcessor4 animalProcessor;
+    private final AnimalProcessor2 animalProcessor;
 
     @GetMapping("feed/{animalType}")
     public String feedAnimalApi(@PathVariable String animalType) {
@@ -40,5 +40,10 @@ public class AnimalController {
         }
 
         return "Successfully made animal sound";
+    }
+
+    @GetMapping("feedAllAnimals")
+    public void feedAllAnimalsApi() {
+        animalProcessor.feedAll();
     }
 }

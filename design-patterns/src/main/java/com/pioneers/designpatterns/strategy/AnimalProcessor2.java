@@ -51,4 +51,9 @@ public class AnimalProcessor2 {
                 .filter(animalService -> animalService.isTypeAligned(animal))
                 .findFirst();
     }
+
+    public void feedAll() {
+        animalServices.reversed()
+                .forEach(AnimalService::feed);
+    }
 }

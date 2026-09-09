@@ -1,16 +1,22 @@
 package com.pioneers.rest.configs.db;
 
+import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.DependsOn;
 
+@Slf4j
 @Configuration
 @EnableConfigurationProperties(DbProperties.class)
 public class DbConfig {
+
+//    private static final Logger log = LoggerFactory.getLogger(DbConfig.class);
+
     /*@Value("${db.username}")
     private String username;
     @Value("${db.password}")
@@ -40,7 +46,7 @@ public class DbConfig {
 //    @ConditionalOnBean(ConnectionPool.class)
 //    @DependsOn("connectionPool")
     public DbConnector dbConnector() {
-        System.out.println("Creating the DB connector bean!!");
+        log.debug("Creating the DB connector bean!!");
         final ConnectionPool connectionPool = toConnectionPool(dbProperties.getConnectionPoolProperties());
 
         return new DbConnector(

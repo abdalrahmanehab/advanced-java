@@ -19,7 +19,7 @@ public class WelcomeController {
 
     @PostMapping("student/requestBody")
     public String welcomeStudentWithRequestBodyApi(@RequestBody StudentRequest studentRequest) {
-        return "Welcome " + studentRequest.getName() + " to Advanced Java and Spring Boot with Docker diploma!!\n" +
-                "Age: " + studentRequest.getAge() + ", Email: " + studentRequest.getEmail();
+        return "Welcome " + studentRequest.name() + " to Advanced Java and Spring Boot with Docker diploma!!\n" +
+                "Age: " + studentRequest.age() + ", Email: " + studentRequest.email();
     }
 }

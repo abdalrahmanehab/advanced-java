@@ -3,6 +3,7 @@ package com.pioneers.designpatterns.strategy;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.core.annotation.AnnotationAwareOrderComparator;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -28,7 +29,13 @@ public class AnimalProcessor3 {
                                         "No AnimalService found for animal type: " + animal
                                 ))
                 ));
-        System.out.println();
+    }
+
+    public void feedAll() {
+        animalServices.values()
+                .stream()
+                .sorted(AnnotationAwareOrderComparator.INSTANCE.reversed())
+                .forEach(AnimalService::feed);
     }
 
     public void feedAnimal(final Animal animal) throws Animal.AnimalException {

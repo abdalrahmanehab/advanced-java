@@ -1,10 +1,12 @@
 package com.pioneers.rest.configs;
 
 import com.pioneers.rest.models.di.PremiumSpellChecker;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+@Slf4j
 @Configuration
 public class SpellCheckerConfig {
 
@@ -15,8 +17,8 @@ public class SpellCheckerConfig {
 
     @Bean(name = "basmaSpellChecker")
     public PremiumSpellChecker premiumSpellChecker() {
-        System.out.println("Creating Premium Spell Checker bean with bean name: basmaSpellChecker and owner name: "
-                + ownerName + ", version: " + version);
+        log.debug("Creating Premium Spell Checker bean with bean name: basmaSpellChecker and owner name: [{}], " +
+                "version: [{}]", ownerName, version);
         return new PremiumSpellChecker(ownerName, version);
     }
 }

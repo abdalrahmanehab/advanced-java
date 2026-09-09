@@ -76,15 +76,15 @@ public class StudentController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Student not found");
         }
 
-        final String updatedFullName = buildFullName(studentUpdateRequest.getFirstName(), studentUpdateRequest.getSecondName());
-        final String updatedHashedPassword = hashPassword(studentUpdateRequest.getPassword());
+        final String updatedFullName = buildFullName(studentUpdateRequest.firstName(), studentUpdateRequest.secondName());
+        final String updatedHashedPassword = hashPassword(studentUpdateRequest.password());
 
         final Student foundStudent = optionalFoundStudent.get();
         foundStudent.setFullName(updatedFullName);
-        foundStudent.setEmail(studentUpdateRequest.getEmail());
-        foundStudent.setAge(studentUpdateRequest.getAge());
+        foundStudent.setEmail(studentUpdateRequest.email());
+        foundStudent.setAge(studentUpdateRequest.age());
         foundStudent.setPassword(updatedHashedPassword);
-        foundStudent.setScore(studentUpdateRequest.getScore());
+        foundStudent.setScore(studentUpdateRequest.score());
 
         return ResponseEntity.ok("Successfully updated student with email: " + foundStudent.getEmail());
     }

@@ -1,10 +1,12 @@
 package com.pioneers.designpatterns.strategy;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Service;
 
 @Slf4j
 //@Primary
+@Order(1)
 @Service
 public class LionStrategy implements AnimalService {
 
@@ -28,4 +30,9 @@ public class LionStrategy implements AnimalService {
     public void makeSound() {
         log.info("🦁🦁🦁🦁🦁🦁🦁🦁🦁🦁🦁🦁");
     }
+
+    /*@Override
+    public int getOrder() {
+        return 1;
+    }*/
 }

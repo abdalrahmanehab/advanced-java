@@ -2,11 +2,13 @@ package com.pioneers.rest.controllers;
 
 import com.pioneers.rest.models.di.PaidSpellChecker;
 import com.pioneers.rest.models.di.TextEditor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+@Slf4j
 @RestController
 @RequestMapping("text")
 public class TextEditorController {
@@ -19,7 +21,7 @@ public class TextEditorController {
 
     @Autowired
     public TextEditorController(TextEditor textEditor) {
-        System.out.println("I am injecting the TextEditor bean in the TextEditorController");
+        log.debug("I am injecting the TextEditor bean in the TextEditorController");
         this.textEditor = textEditor;
     }
 

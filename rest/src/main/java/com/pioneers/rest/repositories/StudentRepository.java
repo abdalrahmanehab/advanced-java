@@ -1,21 +1,24 @@
 package com.pioneers.rest.repositories;
 
 import com.pioneers.rest.models.entities.Student;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
+@Slf4j
 public class StudentRepository {
 
-    private static final Logger log = LoggerFactory.getLogger(StudentRepository.class);
+//    private static final Logger log = LoggerFactory.getLogger(StudentRepository.class);
 
     public static final Map<UUID, Student> STUDENTS_DB = new ConcurrentHashMap<>();
 
     public static void save(final Student student) {
+        final String methodName = "save";
         STUDENTS_DB.put(student.getId(), student);
-        log.info("Saved student with email = [{}] and id = [{}]", student, student.getId());
+        log.debug("{}, Saved student with email = [{}] and id = [{}]", methodName, student, student.getId());
     }
 
     public static void delete(final UUID id) {

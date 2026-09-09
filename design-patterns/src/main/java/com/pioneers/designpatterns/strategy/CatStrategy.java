@@ -1,6 +1,7 @@
 package com.pioneers.designpatterns.strategy;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 /**
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Component;
  * @author abdelaziz.said
  */
 @Slf4j
+@Order(3)
 @Component
 public class CatStrategy implements AnimalService {
 
@@ -34,4 +36,9 @@ public class CatStrategy implements AnimalService {
     public void makeSound() {
         log.info("🦮🦮🦮🦮🦮🦮🦮🦮🦮🦮🦮🦮");
     }
+
+    /*@Override
+    public int getOrder() {
+        return 3;
+    }*/
 }

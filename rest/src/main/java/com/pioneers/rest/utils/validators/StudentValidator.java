@@ -19,23 +19,23 @@ public final class StudentValidator {
     ) {
         final List<String> errors = new LinkedList<>();
 
-        if (isNullOrBlank(studentRegisterRequest.getFirstName())) {
+        if (isNullOrBlank(studentRegisterRequest.firstName())) {
             errors.add("First name is required");
         }
 
-        if (isNullOrBlank(studentRegisterRequest.getSecondName())) {
+        if (isNullOrBlank(studentRegisterRequest.secondName())) {
             errors.add("Second name is required");
         }
 
-        if (studentRegisterRequest.isAgeMisaligned(studentRegisterRequest.getAge())) {
+        if (studentRegisterRequest.isAgeMisaligned(studentRegisterRequest.age())) {
             errors.add("Age is misaligned");
         }
 
-        if (isEmailInvalid(studentRegisterRequest.getEmail())) {
+        if (isEmailInvalid(studentRegisterRequest.email())) {
             errors.add("Email is invalid");
         }
 
-        if (isPasswordInvalid(studentRegisterRequest.getPassword())) {
+        if (isPasswordInvalid(studentRegisterRequest.password())) {
             errors.add("Password is invalid");
         }
 
