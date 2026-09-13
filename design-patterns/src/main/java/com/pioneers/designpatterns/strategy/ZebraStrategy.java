@@ -5,7 +5,7 @@ import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 @Slf4j
-@Component("zebra")
+@Component
 @Order(5)
 public class ZebraStrategy implements AnimalService {
 

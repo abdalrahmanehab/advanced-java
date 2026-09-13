@@ -1,0 +1,16 @@
+package com.pioneers.service.models.dtos.requests;
+
+public record StudentUpdate(String firstName, String secondName, int age, String email, String password, float score) {
+
+    @Override
+    public String toString() {
+        return "StudentUpdate{" +
+                "firstName='" + firstName + '\'' +
+                ", secondName='" + secondName + '\'' +
+                ", age=" + age +
+                ", email='" + email + '\'' +
+                ", score=" + score +
+                ", password='***********" + '\'' +
+                '}';
+    }
+}

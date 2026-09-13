@@ -3,6 +3,7 @@ package com.pioneers.designpatterns;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+//@ComponentScan("com.pioneers.designpatterns.strategy")
 @SpringBootApplication
 public class DesignPatternsApplication {
 

@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 
 @Slf4j
 @Order(2)
-@Component("tiger")
+@Component("tigerStrategyBean")
 public class TigerStrategy implements AnimalService {
 
     private static final Animal TIGER = Animal.TIGER;

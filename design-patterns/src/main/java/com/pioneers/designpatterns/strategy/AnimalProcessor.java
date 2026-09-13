@@ -20,7 +20,7 @@ public class AnimalProcessor {
     private final AnimalService dogAnimalService;
 
     @Autowired
-    public AnimalProcessor(@Qualifier("tiger") AnimalService animalService, @Qualifier("dog") AnimalService dogService) {
+    public AnimalProcessor(@Qualifier("tigerStrategyBean") AnimalService animalService, @Qualifier("dogStrategy") AnimalService dogService) {
         this.animalService = animalService;
         this.dogAnimalService = dogService;
     }
@@ -33,7 +33,7 @@ public class AnimalProcessor {
         animalService.makeSound();
     }
 
-    public void feedDog() {
+    public void feedDog () {
         dogAnimalService.feed();
     }
 }

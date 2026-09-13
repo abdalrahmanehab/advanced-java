@@ -21,6 +21,7 @@
         <module>data-structures</module>
         <module>design-patterns</module>
         <module>rest</module>
+        <module>service</module>
     </modules>
 
     <properties>
