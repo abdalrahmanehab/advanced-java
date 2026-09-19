@@ -9,9 +9,12 @@ import com.pioneers.service.models.entities.Student;
 import com.pioneers.service.repositories.StudentRepository;
 
 import com.pioneers.service.utils.mappers.StudentMapper;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.Email;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.validation.annotation.Validated;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,10 +23,10 @@ import java.util.Optional;
 import static com.pioneers.service.utils.CredentialsHelper.hashPassword;
 import static com.pioneers.service.utils.NameBuilder.buildFullName;
 import static com.pioneers.service.utils.builders.StudentBuilder.buildRegisteredStudent;
-import static com.pioneers.service.utils.validators.StudentValidator.validateStudentRegisterRequest;
 
 @Slf4j
 @Service
+@Validated
 @RequiredArgsConstructor
 public class AuthStudentServiceImpl implements AuthStudentService {
 
@@ -31,17 +34,8 @@ public class AuthStudentServiceImpl implements AuthStudentService {
 
     // TODO: Change the list format to return the field and its cause
     @Override
-    public void signup(final StudentRegister studentRegisterRequest) throws RegisterException, ValidationException {
+    public void signup(final StudentRegister studentRegisterRequest) throws RegisterException {
         final String methodName = "signup";
-
-        final List<String> errors = validateStudentRegisterRequest(studentRegisterRequest);
-
-        if (!errors.isEmpty()) {
-            final String logMessage = String.format("%s, Errors in registerStudentApi for [%s] due to: [%s]",
-                    methodName, studentRegisterRequest.email(), errors);
-
-            throw new ValidationException("Request Validation Exception", logMessage, errors);
-        }
 
         final Optional<Student> optionalStudent = studentRepositoryImpl.findByEmail(studentRegisterRequest.email());
 
@@ -107,8 +101,7 @@ public class AuthStudentServiceImpl implements AuthStudentService {
     }
 
     @Override
-    public GenericResponse<?> saveAll(final List<StudentRegister> studentRegisterRequests)
-            throws RegisterException, ValidationException {
+    public GenericResponse<?> saveAll(final List<StudentRegister> studentRegisterRequests) throws RegisterException {
 
         final List<Student> registeredStudents = new ArrayList<>();
 

@@ -1,8 +1,24 @@
 package com.pioneers.service.models.dtos.requests;
 
-public record StudentRegister(String firstName, String secondName, int age, String email, String password) {
+import com.pioneers.service.utils.validators.custominterface.Age;
+import jakarta.validation.constraints.*;
 
-    public boolean isAgeMisaligned(final int age) {
-        return age < 18 || age > 25;
-    }
+public record StudentRegister(
+        @NotBlank(message = "{validation.first-name.blank}")
+        @Size(min = 2, max = 15, message = "{validation.first-name.error.message}")
+        String firstName,
+        @NotBlank(message = "{validation.second-name.blank}")
+        @Size(min = 2, max = 15, message = "{validation.second-name.size}")
+        String secondName,
+//        @Min(value = 18, message = "{validation.age.min}")
+//        @Max(value = 25, message = "{validation.age.max}")
+        // TODO: I need to add the values of min and max here
+        @Age
+        int age,
+        @Email(message = "{validation.email.pattern}")
+        String email,
+        @Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[^A-Za-z0-9\\s])\\S{9,31}$",
+                message = "{validation.password.pattern}")
+        String password
+) {
 }

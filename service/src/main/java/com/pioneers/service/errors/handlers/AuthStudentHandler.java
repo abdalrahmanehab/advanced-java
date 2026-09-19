@@ -5,6 +5,7 @@ import com.pioneers.service.errors.exceptions.LoginException;
 import com.pioneers.service.errors.exceptions.LogoutException;
 import com.pioneers.service.errors.exceptions.RegisterException;
 import com.pioneers.service.errors.models.ErrorResponse;
+import com.pioneers.service.errors.models.GenericResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -16,46 +17,38 @@ import java.util.Optional;
 public class AuthStudentHandler {
 
     @ExceptionHandler(exception = RegisterException.class)
-    public ErrorResponse<?> handleRegisterException(final RegisterException e) {
-        return new ErrorResponse<>(
+    public GenericResponse<?> handleRegisterException(final RegisterException e) {
+        return new GenericResponse<>(
                 RegisterException.CODE,
-                RegisterException.MESSAGE,
-                e.getDescription(),
                 e.getCurrentTimestamp(),
-                Optional.empty()
+                new ErrorResponse(RegisterException.MESSAGE, e.getDescription())
         );
     }
 
     @ExceptionHandler(exception = LogoutException.class)
-    public ErrorResponse<?> handleLogoutException(final LogoutException e) {
-        return new ErrorResponse<>(
+    public GenericResponse<?> handleLogoutException(final LogoutException e) {
+        return new GenericResponse<>(
                 LogoutException.CODE,
-                LogoutException.MESSAGE,
-                e.getDescription(),
                 e.getCurrentTimestamp(),
-                Optional.empty()
+                new ErrorResponse(LogoutException.MESSAGE, e.getDescription())
         );
     }
 
     @ExceptionHandler(exception = LoginException.class)
-    public ErrorResponse<?> handleLoginException(final LoginException e) {
-        return new ErrorResponse<>(
+    public GenericResponse<?> handleLoginException(final LoginException e) {
+        return new GenericResponse<>(
                 LoginException.CODE,
-                LoginException.MESSAGE,
-                e.getDescription(),
                 e.getCurrentTimestamp(),
-                Optional.empty()
+                new ErrorResponse(LoginException.MESSAGE, e.getDescription())
         );
     }
 
     @ExceptionHandler(exception = CredentialsException.class)
-    public ErrorResponse<?> handleCredentialsException(final CredentialsException e) {
-        return new ErrorResponse<>(
+    public GenericResponse<?> handleCredentialsException(final CredentialsException e) {
+        return new GenericResponse<>(
                 CredentialsException.CODE,
-                CredentialsException.MESSAGE,
-                e.getDescription(),
                 e.getCurrentTimestamp(),
-                Optional.empty()
+                new ErrorResponse(CredentialsException.MESSAGE, e.getDescription())
         );
     }
 }
