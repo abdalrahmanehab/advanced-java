@@ -22,6 +22,8 @@
         <module>design-patterns</module>
         <module>rest</module>
         <module>service</module>
+        <module>university-system</module>
+        <module>assignments</module>
     </modules>
 
     <properties>
