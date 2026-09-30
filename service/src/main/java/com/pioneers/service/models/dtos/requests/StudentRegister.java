@@ -26,26 +26,34 @@ public record StudentRegister(
     public void validate() {
         final Map<String, String> errors = new LinkedHashMap<>();
 
-        catchRuleExceptions(errors,ValidationRules.FIRST_NAME, firstName);
-        catchRuleExceptions(errors,ValidationRules.SECOND_NAME, secondName);
-        catchRuleExceptions(errors,ValidationRules.AGE, String.valueOf(age));
-        catchRuleExceptions(errors,ValidationRules.EMAIL, email);
-        catchRuleExceptions(errors,ValidationRules.PASSWORD, password);
+        try {
+            ValidationRulesService.validate(ValidationRules.FIRST_NAME, firstName);
+        } catch (final ValidationRulesService.RuleException e) {
+            errors.putIfAbsent(e.getMessage(), e.getDescription());
+        }
+        try {
+            ValidationRulesService.validate(ValidationRules.SECOND_NAME, secondName);
+        } catch (final ValidationRulesService.RuleException e) {
+            errors.putIfAbsent(e.getMessage(), e.getDescription());
+        }
+        try {
+            ValidationRulesService.validate(ValidationRules.AGE, String.valueOf(age));
+        } catch (ValidationRulesService.RuleException e) {
+            errors.putIfAbsent(e.getMessage(), e.getDescription());
+        }
+        try {
+            ValidationRulesService.validate(ValidationRules.EMAIL, email);
+        } catch (ValidationRulesService.RuleException e) {
+            errors.putIfAbsent(e.getMessage(), e.getDescription());
+        }
+        try {
+            ValidationRulesService.validate(ValidationRules.PASSWORD, password);
+        } catch (ValidationRulesService.RuleException e) {
+            errors.putIfAbsent(e.getMessage(), e.getDescription());
+        }
 
         if (!errors.isEmpty()) {
             throw new ValidationRulesService.ValidationException(errors);
-        }
-    }
-
-    private static void catchRuleExceptions (
-            final Map<String, String> errors
-            ,ValidationRules validationRule
-            ,String rule
-    ) {
-        try {
-            ValidationRulesService.validate(validationRule, rule);
-        } catch (final ValidationRulesService.RuleException e) {
-            errors.putIfAbsent(e.getMessage(), e.getDescription());
         }
     }
 }
