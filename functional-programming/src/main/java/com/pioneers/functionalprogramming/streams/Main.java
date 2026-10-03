@@ -12,7 +12,6 @@ public class Main {
         .mapToInt(Main::addOne)
                 .sum();
 
-
         System.out.println("sum = " + sum);
     }
 
